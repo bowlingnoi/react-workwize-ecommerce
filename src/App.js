@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Grommet, Box, TextInput, Stack } from 'grommet'
+import AppBar from './components/AppBar'
+import ProductList from './components/ProductList'
+import SearchBar from './components/SearchBar'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  render() { 
+    return (
+      <Grommet plain full>
+        <Box direction="column" fill>
+          <AppBar />
+
+          <Box direction="row"
+            pad="medium" fill>
+
+            <Box width="medium" pad={{top: "small", right: "small"}} >
+              <SearchBar />
+            </Box>
+
+            <Box flex>
+              <ProductList />
+            </Box>
+          </Box>
+
+        </Box>
+      </Grommet>
+    );
+  }
 }
 
 export default App;
