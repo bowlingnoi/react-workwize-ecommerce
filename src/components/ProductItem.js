@@ -1,7 +1,15 @@
 import React from 'react'
-import { Box, Image, Heading, Text, Stack } from 'grommet';
+import { Box, Image, Heading, Text, Stack, Button } from 'grommet';
+import { connect } from 'react-redux'
+import { Shop } from 'grommet-icons';
 
 class ProductItem extends React.Component{
+
+    handleAddToCart = () => {
+        const { addItem , id, name } = this.props;
+        addItem({ productId: id , name: name })
+    }
+
     render() {
         const { id, name, description, image, price } = this.props
         return (
@@ -23,11 +31,32 @@ class ProductItem extends React.Component{
                     <Heading textAlign="center" level={4} margin={{ vertical: 'xsmall' }}>
                         {name}</Heading>
                     <Text textAlign="center">
-                            {description}</Text>
+                        {description}</Text>
+                </Box>
+                <Box pad="medium">
+                    <Button primary
+                        pad="medium"
+                        margin="small"
+                        icon={<Shop size="26px" />}
+                        label="Add to cart"
+                        alignSelf="center"
+                        onClick={() => { this.handleAddToCart() }}  
+                    >
+                    </Button>
                 </Box>
             </Box>
         )
     }
 }
 
-export default ProductItem
+const mapStateToProps = state => {
+    return {
+        state
+    }
+}
+const mapDispatchToProps = ({ cart : { addItem }}) => {
+    return {
+        addItem: ( x ) => addItem( x )
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem)

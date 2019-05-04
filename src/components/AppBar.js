@@ -1,7 +1,11 @@
 import React from 'react'
 import { Box, Heading } from 'grommet'
+import { connect } from 'react-redux'
+import ShoppingCartButton from './ShoppingCartButton';
+
 
 class AppBar extends React.Component{
+
     render() {
         return (
             <Box tag="header"
@@ -13,13 +17,19 @@ class AppBar extends React.Component{
                 elevation="medium"
                 style={{ zIndex: '1' }} >
                 <Heading level="4"
-                    margin="xsmall"
-                >
+                    margin="xsmall" >
                     Bowlingnoi store
                 </Heading>
+                <ShoppingCartButton />
             </Box>
         )
     }
 }
 
-export default AppBar;
+
+const mapStateToProps = state => {
+    return {
+        cartItems: state.cart.cartItems
+    }
+}
+export default connect(mapStateToProps)(AppBar);

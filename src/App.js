@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grommet, Box, TextInput, Stack } from 'grommet'
+import { Grommet, Box } from 'grommet'
 import AppBar from './components/AppBar'
 import ProductList from './components/ProductList'
 import SearchBar from './components/SearchBar'
@@ -16,11 +16,11 @@ class App extends React.Component {
           <Box direction="row"
             pad="medium" fill>
 
-            <Box width="medium" pad={{top: "small", right: "small"}} >
+            <Box width="1/3" pad={{top: "small", right: "small"}} >
               <SearchBar />
             </Box>
 
-            <Box flex>
+            <Box flex >
               <ProductList />
             </Box>
           </Box>

@@ -2,7 +2,8 @@ import React from 'react'
 import request from '../utils/request';
 import { Box } from 'grommet';
 import ProductItem from '../components/ProductItem'
-
+import { connect } from 'react-redux';
+import _ from 'lodash'
 
 class ProductList extends React.Component{
     state = {
@@ -12,15 +13,34 @@ class ProductList extends React.Component{
         this.fetchData()
     }
 
+    componentDidUpdate(prevState, nextState) {
+        const { search } = this.props
+
+        console.log(prevState, nextState, search, (search != prevState.search) )
+        if (search != prevState.search) {
+            this.fetchData()
+        }
+    }
+
     fetchData = async () => {
-        const res = await request.get('/products')
-        const data = res.data.data.map(item => ({
+        const {
+            search
+        } = this.props
+        const res = await request.get('/products?include=main_image&filter=like(name,*'+ search +'*)')
+        
+        if (res.data.data.length == 0) return;
+        const temp_data = res.data.data.map(item => ({
             id: item.id,
             name: item.name,
             description: item.description,
             price: item.meta.display_price.with_tax.formatted,
-            image: 'https://via.placeholder.com/300x400.png'
+            image_id: item.relationships.main_image.data.id,
         }))
+        const image = res.data.included.main_images.map( item => ({
+            image_id: item.id,
+            image: item.link.href,
+        }))
+        const data = _.merge(temp_data, image)
 
         this.setState({
             data,
@@ -29,6 +49,7 @@ class ProductList extends React.Component{
 
     render() {
         const { data } = this.state
+
         return (
             <Box direction="column"
                 pad="small"
@@ -52,4 +73,9 @@ class ProductList extends React.Component{
     }
 }
 
-export default ProductList;
+const mapStateToProps = state => {
+    return {
+        search: state.cart.q
+    }
+}
+export default connect(mapStateToProps)(ProductList);
