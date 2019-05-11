@@ -12,11 +12,11 @@ class CartItemList extends React.Component{
 
         return (
             <Box pad="small">
-            {
+                {
                 cartItems.map(item => (
                     <Box pad="small" key={item.id} >{item.name} x {item.amount}</Box>
                 ))
-            }
+                }
             </Box>
         )
     }

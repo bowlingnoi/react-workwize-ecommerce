@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@rematch/core": "^1.1.0",
+    "@rematch/persist": "^1.1.6",
+    "@rematch/select": "^2.0.4",
     "axios": "^0.18.0",
     "grommet": "^2.6.6",
     "grommet-icons": "^4.2.0",
@@ -11,6 +13,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "redux": "^4.0.1",
     "styled-components": "^4.2.0"

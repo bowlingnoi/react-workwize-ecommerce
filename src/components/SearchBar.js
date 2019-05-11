@@ -1,26 +1,25 @@
 import React from 'react'
-import request from '../utils/request';
 import { Box, Stack, TextInput } from 'grommet';
 import { FormSearch } from 'grommet-icons';
 import { connect } from 'react-redux';
-import _ from 'lodash'
+// import _ from 'lodash'
 
 class SearchBar extends React.Component{
     // state = {
     //     search : ''
     // }
-    
+    // componentDidMount = () => {
+    //     this.state.search = this.props.search
+    // }
+
     setValue = (search) => {
         const { queryItem } = this.props
         queryItem( search )
-        
-        // this.setState({
-        //     search,
-        // })
+
     }
 
     onSearchEnter = (event) => {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             // updateItem()
         }
     }

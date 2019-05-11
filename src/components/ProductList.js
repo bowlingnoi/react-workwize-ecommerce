@@ -16,8 +16,8 @@ class ProductList extends React.Component{
     componentDidUpdate(prevState, nextState) {
         const { search } = this.props
 
-        console.log(prevState, nextState, search, (search != prevState.search) )
-        if (search != prevState.search) {
+        console.log(prevState, nextState, search, (search !== prevState.search) )
+        if (search !== prevState.search) {
             this.fetchData()
         }
     }
@@ -28,7 +28,7 @@ class ProductList extends React.Component{
         } = this.props
         const res = await request.get('/products?include=main_image&filter=like(name,*'+ search +'*)')
         
-        if (res.data.data.length == 0) return;
+        if (res.data.data.length === 0) return;
         const temp_data = res.data.data.map(item => ({
             id: item.id,
             name: item.name,
